@@ -19,13 +19,14 @@ class Employee implements Person, Job {
     private double Age;
     private String Position;
     private String EmpID;
-    private ArrayList<String> projects;
+    private ArrayList<Project> projects;
 
     Employee(String Name, String Position, String EmpID) {
         this.Name = Name;
         this.Position = Position;
         this.EmpID = EmpID;
         this.projects = new ArrayList<>();
+        
     }
 
     @Override
@@ -68,86 +69,46 @@ class Employee implements Person, Job {
         this.EmpID = EmpID;
     }
 
-    public ArrayList<String> getProjects() {
-        return projects;
-    }
-
-    public void addProject(String project) {
-        projects.add(project);
+    public void addProject(Project project) {
+        this.projects.add(project);
     }
 
     public void showDetails() {
         System.out.println("Employee Name: " + Name);
         System.out.println("Employee Position: " + Position);
         System.out.println("Employee EmpID: " + EmpID);
-        System.out.println("Employee Projects: " + projects);
-        System.out.println();
-    }
+        System.out.println("Projects: "); 
+        for (int i = 0; i < projects.size(); i++) {
+            System.out.println(projects.get(i).getProgect());
+        }
 }
-
+}
 class Project {
-    private ArrayList<Employee> myProject;
-    private String description; 
+    private String project1; 
     private String projectDescription;
 
-    public Project(String description, String projectDescription) { 
-        this.myProject = new ArrayList<>();
-        this.description = description; 
+    public Project(String project1, String projectDescription) { 
+        this.project1 = project1; 
         this.projectDescription = projectDescription; 
     }
 
-    public void addEmployeeToProject(Employee employee) {
-        myProject.add(employee);
-    }
+    public String getProgect(){
+        return project1 + ":"+projectDescription; 
 
-    public ArrayList<Employee> getMyProject() {
-        return myProject;
-    }
-
-    public void setMyProject(ArrayList<Employee> myProject) {
-        this.myProject = myProject;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    public String getProjectDescription() {
-        return projectDescription;
-    }
-
-    public void setProjectDescription(String projectDescription) {
-        this.projectDescription = projectDescription;
-    }
-    
-    public void showDetails() {
-        System.out.println("Project Description: " + description);
-        System.out.println("Project's Own Description: " + projectDescription); 
-        for (Employee employee : myProject) {
-            System.out.println("Employee Name: " + employee.getName());
-            System.out.println("Employee Position: " + employee.getPosition());
-            System.out.println("Employee EmpID: " + employee.getEmpID());
-            System.out.println(); 
-            
-        }
     }
 }
 
-public class Main {
+public class FinalEx {
     public static void main(String[] args) {
-        Project project = new Project("Developing a web application", "Web project description"); 
-        
-        Employee tom = new Employee("Tom", "Developer", "EMP001");
-        Employee tim = new Employee("Tim", "Designer", "EMP002");
+        Project project = new Project("WEB A", "Web project description"); 
+        Project projec1 = new Project("Mobile A", "Web project description"); 
+        Employee tom = new Employee("Tom", "UX/Ui", "EMP001");
+        Employee tim = new Employee("Tim", "FontEnd", "EMP002");
 
-        project.addEmployeeToProject(tom);
-        project.addEmployeeToProject(tim);
-
-        tom.showDetails();
+        tom.addProject(project);
+        tom.addProject(projec1);
+        tim.addProject(project);
+        tom.showDetails(); 
         tim.showDetails();
     }
 }
